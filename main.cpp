@@ -6,6 +6,8 @@
 using namespace std;
 
 bool dayNight = false;
+bool rainday = false;
+float rain = 0.0;
 
 
 void setColor(string col){
@@ -26,6 +28,7 @@ void setColor(string col){
         else if(col == "darkerGreen") glColor3ub (10, 176, 128);
         else if(col == "blue") glColor3ub (0, 122, 171);
         else if(col == "sun") glColor3ub (246, 247, 193);
+        else if(col == "rain") glColor3ub(255, 255, 255);
 
         else{
             cout<<"INVALID COLOR CODE: "<<col<<"\n";
@@ -50,6 +53,7 @@ void setColor(string col){
         else if(col == "darkerGreen") glColor3ub (94, 76, 52);
         else if(col == "blue") glColor3ub (62, 52, 60);
         else if(col == "sun") glColor3ub (225, 115, 90);
+        else if(col == "rain") glColor3ub(255, 255, 255);
         else{
             cout<<"INVALID COLOR CODE: "<<col<<"\n";
             glColor3ub (0,0,0);
@@ -2395,6 +2399,31 @@ void drawSun(){
 	glEnd();
 	glPopMatrix();
 }
+void Rain(int value){
+
+if(rainday){
+
+    rain += 0.01f;
+
+    glBegin(GL_POINTS);
+    for(int i=1;i<=1000;i++)
+    {
+        int x=rand(),y=rand();
+        x%=1300; y%=650;
+        glBegin(GL_LINES);
+        setColor("rain");
+        glVertex2d(x,y);
+        glVertex2d(x+5,y+5);
+        glEnd();
+    }
+
+	glutPostRedisplay();
+	glutTimerFunc(20, Rain, 0);
+
+    glFlush();
+
+    }
+}
 void update(int val){
     //animate train
     if(trainPosition < -1050) trainPosition = 1400;
@@ -2475,6 +2504,16 @@ void handleKeypress(unsigned char key, int x, int y) {
 
         case 'x':
             trainSpeed = 5;
+
+        case 'q':
+        rainday = true;
+        Rain(rain);
+        break;
+
+        case 'e':
+        rainday = false;
+        Rain(rain);
+        break;
 
     glutPostRedisplay();
 
