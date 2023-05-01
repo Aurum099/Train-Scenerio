@@ -10,9 +10,11 @@ bool rainday = false;
 float rain = 0.0;
 
 
-void setColor(string col){
+void setColor(string col)
+{
     //day
-    if(dayNight){
+    if(dayNight)
+    {
         if(col == "background") glColor3ub (23, 201, 205);
         else if(col == "darkBlue") glColor3ub (0, 84, 120);
         else if(col == "navyBlue") glColor3ub (0, 66, 101);
@@ -30,14 +32,16 @@ void setColor(string col){
         else if(col == "sun") glColor3ub (246, 247, 193);
         else if(col == "rain") glColor3ub(255, 255, 255);
 
-        else{
+        else
+        {
             cout<<"INVALID COLOR CODE: "<<col<<"\n";
             glColor3ub (0,0,0);
         }
 
     }
     //night
-    else{
+    else
+    {
         if(col == "background") glColor3ub (106, 83, 77);
         else if(col == "darkBlue") glColor3ub (44, 37, 45);
         else if(col == "navyBlue") glColor3ub (37, 31, 31);
@@ -54,7 +58,8 @@ void setColor(string col){
         else if(col == "blue") glColor3ub (62, 52, 60);
         else if(col == "sun") glColor3ub (225, 115, 90);
         else if(col == "rain") glColor3ub(255, 255, 255);
-        else{
+        else
+        {
             cout<<"INVALID COLOR CODE: "<<col<<"\n";
             glColor3ub (0,0,0);
         }
@@ -76,7 +81,8 @@ float cloud3Speed = 2.0;
 
 
 
-void drawBackground(){
+void drawBackground()
+{
     setColor("background");
     glBegin(GL_QUADS);
     glVertex2i(0,0);
@@ -86,7 +92,8 @@ void drawBackground(){
     glEnd();
 }
 
-void drawTrain(){
+void drawTrain()
+{
 
 
     glPushMatrix();
@@ -1111,7 +1118,7 @@ void drawMidBuilding2()
     glVertex2i(530,215);
     glEnd();
     //
-     setColor("darkBlue");
+    setColor("darkBlue");
     glBegin(GL_QUADS);
     glVertex2i(530,215);
     glVertex2i(545,215);
@@ -1141,7 +1148,7 @@ void drawMidBuilding2()
     glVertex2i(530,250);
     glEnd();
     //
-     setColor("darkBlue");
+    setColor("darkBlue");
     glBegin(GL_QUADS);
     glVertex2i(530,250);
     glVertex2i(545,250);
@@ -1287,7 +1294,7 @@ void drawRightBuilding()
     glVertex2i(530,215);
     glEnd();
     //
-     setColor("darkBlue");
+    setColor("darkBlue");
     glBegin(GL_QUADS);
     glVertex2i(530,215);
     glVertex2i(545,215);
@@ -1317,7 +1324,7 @@ void drawRightBuilding()
     glVertex2i(530,250);
     glEnd();
     //
-     setColor("darkBlue");
+    setColor("darkBlue");
     glBegin(GL_QUADS);
     glVertex2i(530,250);
     glVertex2i(545,250);
@@ -1461,7 +1468,7 @@ void drawMidBuilding1()
     glVertex2i(530,215);
     glEnd();
     //
-     setColor("darkBlue");
+    setColor("darkBlue");
     glBegin(GL_QUADS);
     glVertex2i(530,215);
     glVertex2i(545,215);
@@ -1491,7 +1498,7 @@ void drawMidBuilding1()
     glVertex2i(530,250);
     glEnd();
     //
-     setColor("darkBlue");
+    setColor("darkBlue");
     glBegin(GL_QUADS);
     glVertex2i(530,250);
     glVertex2i(545,250);
@@ -1554,7 +1561,8 @@ void drawMidBuilding1()
 
 }
 
-void drawBridge(){
+void drawBridge()
+{
 
 
     setColor("navyBlue");
@@ -1620,196 +1628,204 @@ void drawBridge(){
 
 }
 
-void drawLeftLand(){
+void drawLeftLand()
+{
     glPushMatrix();
     glTranslatef(50,-150,0);
     setColor("darkGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 275*sin(i);
-			float y = 280*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 275*sin(i);
+        float y = 280*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 }
 
-void drawRightLand(){
+void drawRightLand()
+{
     glPushMatrix();
     glTranslatef(1200,-180,0);
     setColor("darkGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 310*sin(i);
-			float y = 320*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 310*sin(i);
+        float y = 320*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 }
 
-void drawTree1(){
+void drawTree1()
+{
 
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
     glTranslatef(200,550,0);
     setColor("lightGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 150*sin(i);
-			float y = 150*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 150*sin(i);
+        float y = 150*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(200,650,0);
     setColor("lightGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 120*sin(i);
-			float y = 120*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 120*sin(i);
+        float y = 120*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
+    glPopMatrix();
 }
 
-void drawTree2(){
+void drawTree2()
+{
 
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
     glTranslatef(550,470,0);
     setColor("darkerGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 150*sin(i);
-			float y = 150*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 150*sin(i);
+        float y = 150*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(550,570,0);
     setColor("darkerGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 120*sin(i);
-			float y = 120*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 120*sin(i);
+        float y = 120*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
+    glPopMatrix();
 }
 
-void drawTree3(){
+void drawTree3()
+{
 
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
     glTranslatef(900,390,0);
     setColor("blue");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 150*sin(i);
-			float y = 150*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 150*sin(i);
+        float y = 150*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(900,490,0);
     setColor("blue");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 120*sin(i);
-			float y = 120*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 120*sin(i);
+        float y = 120*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
+    glPopMatrix();
 }
 
-void drawTree4(){
+void drawTree4()
+{
 
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
     glTranslatef(5900,400,0);
     setColor("lightGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 150*sin(i);
-			float y = 150*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 150*sin(i);
+        float y = 150*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(5900,500,0);
     setColor("lightGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 120*sin(i);
-			float y = 120*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 120*sin(i);
+        float y = 120*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
+    glPopMatrix();
 }
 
-void drawTree5(){
+void drawTree5()
+{
 
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
     glTranslatef(6240,470,0);
     setColor("darkerGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 150*sin(i);
-			float y = 150*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 150*sin(i);
+        float y = 150*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(6240,570,0);
     setColor("darkerGreen");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 120*sin(i);
-			float y = 120*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 120*sin(i);
+        float y = 120*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
+    glPopMatrix();
 }
-void drawTallBuilding(){
+void drawTallBuilding()
+{
     setColor("mediumGreen");
     glBegin(GL_QUADS);
     glVertex2i(820,120);
@@ -1971,7 +1987,7 @@ void drawTallBuilding(){
     glVertex2i(925,470);
     glVertex2i(850,470);
     glEnd();
-     setColor("mediumGreen");
+    setColor("mediumGreen");
     glBegin(GL_QUADS);
     glVertex2i(850,470);
     glVertex2i(925,470);
@@ -1999,7 +2015,7 @@ void drawTallBuilding(){
     glVertex2i(935,530);
     glVertex2i(925,530);
     glEnd();
-     setColor("white");
+    setColor("white");
     glBegin(GL_QUADS);
     glVertex2i(935,120);
     glVertex2i(936,120);
@@ -2037,7 +2053,8 @@ void drawTallBuilding(){
 
 }
 
-void drawBranches(){
+void drawBranches()
+{
     //1
     setColor("white");
     glBegin(GL_QUADS);
@@ -2174,7 +2191,8 @@ void drawBranches(){
 }
 
 
-void drawBackBuilding(){
+void drawBackBuilding()
+{
 
     setColor("teal");
     glBegin(GL_QUADS);
@@ -2215,7 +2233,8 @@ void drawBackBuilding(){
 
 }
 
-void drawClouds1(){
+void drawClouds1()
+{
     glPushMatrix();
     glTranslatef(cloud1Position,-90,0);
     glScalef(1,1,1);
@@ -2223,41 +2242,41 @@ void drawClouds1(){
     glPushMatrix();
     glTranslatef(200,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 30*sin(i);
-			float y = 40*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 30*sin(i);
+        float y = 40*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
-	glPushMatrix();
+    glPushMatrix();
     glTranslatef(250,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 35*sin(i);
-			float y = 45*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 35*sin(i);
+        float y = 45*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(300,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 35*sin(i);
-			float y = 45*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 35*sin(i);
+        float y = 45*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     setColor("background");
     glBegin(GL_QUADS);
@@ -2271,7 +2290,8 @@ void drawClouds1(){
 
 }
 
-void drawClouds2(){
+void drawClouds2()
+{
     glPushMatrix();
     glTranslatef(cloud2Position,250,0);
     glScalef(0.5,0.4,1);
@@ -2279,41 +2299,41 @@ void drawClouds2(){
     glPushMatrix();
     glTranslatef(200,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 30*sin(i);
-			float y = 40*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 30*sin(i);
+        float y = 40*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
-	glPushMatrix();
+    glPushMatrix();
     glTranslatef(250,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 35*sin(i);
-			float y = 45*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 35*sin(i);
+        float y = 45*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(300,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 35*sin(i);
-			float y = 45*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 35*sin(i);
+        float y = 45*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     setColor("background");
     glBegin(GL_QUADS);
@@ -2327,7 +2347,8 @@ void drawClouds2(){
 
 }
 
-void drawClouds3(){
+void drawClouds3()
+{
     glPushMatrix();
     glTranslatef(cloud3Position,250,0);
     glScalef(0.5,0.4,1);
@@ -2335,41 +2356,41 @@ void drawClouds3(){
     glPushMatrix();
     glTranslatef(200,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 30*sin(i);
-			float y = 40*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 30*sin(i);
+        float y = 40*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
-	glPushMatrix();
+    glPushMatrix();
     glTranslatef(250,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 35*sin(i);
-			float y = 45*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 35*sin(i);
+        float y = 45*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     glPushMatrix();
     glTranslatef(300,550,0);
     setColor("white");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 35*sin(i);
-			float y = 45*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
+    {
+        float x = 35*sin(i);
+        float y = 45*cos(i);
+        glVertex2f(x,y);
+    }
+    glEnd();
+    glPopMatrix();
 
     setColor("background");
     glBegin(GL_QUADS);
@@ -2384,47 +2405,282 @@ void drawClouds3(){
 }
 
 
-void drawSun(){
+void drawSun()
+{
     glPushMatrix();
     glScalef(1,1,1);
     glTranslatef(200,550,0);
     setColor("sun");
-	glBegin(GL_TRIANGLE_FAN);
-		for(float i=0;i<=2*3.14;i+=0.001)
-		{
-			float x = 30*sin(i);
-			float y = 30*cos(i);
-			glVertex2f(x,y);
-		}
-	glEnd();
-	glPopMatrix();
-}
-void Rain(int value){
-
-if(rainday){
-
-    rain += 0.01f;
-
-    glBegin(GL_POINTS);
-    for(int i=1;i<=1000;i++)
+    glBegin(GL_TRIANGLE_FAN);
+    for(float i=0; i<=2*3.14; i+=0.001)
     {
-        int x=rand(),y=rand();
-        x%=1300; y%=650;
-        glBegin(GL_LINES);
-        setColor("rain");
-        glVertex2d(x,y);
-        glVertex2d(x+5,y+5);
-        glEnd();
+        float x = 30*sin(i);
+        float y = 30*cos(i);
+        glVertex2f(x,y);
     }
+    glEnd();
+    glPopMatrix();
+}
+void drawStars(){
 
-	glutPostRedisplay();
-	glutTimerFunc(20, Rain, 0);
 
-    glFlush();
+    glPushMatrix();
+    glTranslatef(50,520,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(10,515,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(100,540,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(150,560,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(200,500,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(280,490,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(320,490,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(400,510,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(500,530,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+
+
+    glPushMatrix();
+    glTranslatef(650,510,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(700,500,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(760,540,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(800,520,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+
+
+    glPushMatrix();
+    glTranslatef(760+100,530,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(800+100,505,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+
+
+
+    glPushMatrix();
+    glTranslatef(760+200,530,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+
+
+
+    glPushMatrix();
+    glTranslatef(850+200,550,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(760+300,560,0);
+    setColor("sun");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(5,0);
+    glVertex2i(5,5);
+    glVertex2i(0,5);
+    glEnd();
+    glPopMatrix();
+
+
+
+
+
+
+
+
+
+
+}
+
+void Rain(int value)
+{
+
+    if(rainday)
+    {
+
+        rain += 0.01f;
+
+        glBegin(GL_POINTS);
+        for(int i=1; i<=1000; i++)
+        {
+            int x=rand(),y=rand();
+            x%=1300;
+            y%=650;
+            glBegin(GL_LINES);
+            setColor("rain");
+            glVertex2d(x,y);
+            glVertex2d(x+5,y+5);
+            glEnd();
+        }
+
+        glutPostRedisplay();
+        glutTimerFunc(20, Rain, 0);
+
+        glFlush();
 
     }
 }
-void update(int val){
+void update(int val)
+{
     //animate train
     if(trainPosition < -1050) trainPosition = 1400;
     trainPosition -= trainSpeed;
@@ -2450,6 +2706,7 @@ void myDisplay(void)
 {
     glClear (GL_COLOR_BUFFER_BIT);
     drawBackground();
+    if(!dayNight) drawStars();
     drawSun();
     drawClouds1();
     drawClouds2();
@@ -2483,41 +2740,44 @@ void myInit (void)
     gluOrtho2D(0.0, 1280.0, 0.0, 620.0);
 }
 
-void handleKeypress(unsigned char key, int x, int y) {
+void handleKeypress(unsigned char key, int x, int y)
+{
 
-	switch (key) {
-        case 's':
-            if(trainSpeed >= 1) trainSpeed -= 1;
-            break;
+    switch (key)
+    {
+    case 's':
+        if(trainSpeed >= 1) trainSpeed -= 1;
+        break;
 
-        case 'w':
-            trainSpeed += 1;
-            break;
+    case 'w':
+        trainSpeed += 1;
+        break;
 
-        case 't':
-            dayNight = !dayNight;
-            break;
+    case 't':
+        dayNight = !dayNight;
+        break;
 
-        case 'r':
-            trainSpeed = 0;
-            break;
+    case 'r':
+        trainSpeed = 0;
+        break;
 
-        case 'x':
-            trainSpeed = 5;
+    case 'x':
+        trainSpeed = 5;
+        break;
 
-        case 'q':
+    case 'q':
         rainday = true;
         Rain(rain);
         break;
 
-        case 'e':
+    case 'e':
         rainday = false;
         Rain(rain);
         break;
 
-    glutPostRedisplay();
+        glutPostRedisplay();
 
-	}
+    }
 
 }
 
