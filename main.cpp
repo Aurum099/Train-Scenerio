@@ -3,11 +3,34 @@
 #include <stdlib.h>
 #include <math.h>
 #include<iostream>
+#include<cstdio>
 using namespace std;
 
+bool cover = true;
 bool dayNight = false;
 bool rainday = false;
 float rain = 0.0;
+
+
+//TEXT
+
+const int font=(int)GLUT_BITMAP_HELVETICA_18 ;
+
+
+
+void renderBitmapString(float x, float y, void *font,const char *str)
+{
+    const char *c;
+    glRasterPos2f(x, y);
+    for (c=str; *c != '\0'; c++) {
+        glutBitmapCharacter(font, *c);
+    }
+}
+
+
+
+
+
 
 
 void setColor(string col)
@@ -31,6 +54,12 @@ void setColor(string col)
         else if(col == "blue") glColor3ub (0, 122, 171);
         else if(col == "sun") glColor3ub (246, 247, 193);
         else if(col == "rain") glColor3ub(255, 255, 255);
+        else if(col == "humanSkin") glColor3ub(240, 215, 184);
+        else if(col == "humanDetail") glColor3ub(59, 77, 87);
+        else if(col == "humanPrimary") glColor3ub(192, 188, 99);
+        else if(col == "humanSecondary") glColor3ub(119, 80, 51);
+        else if(col == "humanSkinTrans") glColor3ub(77, 114, 128);
+        else if(col == "humanDetailTrans") glColor3ub(19, 69, 95);
 
         else
         {
@@ -58,6 +87,12 @@ void setColor(string col)
         else if(col == "blue") glColor3ub (62, 52, 60);
         else if(col == "sun") glColor3ub (225, 115, 90);
         else if(col == "rain") glColor3ub(255, 255, 255);
+        else if(col == "humanSkin") glColor3ub(211, 110, 91);
+        else if(col == "humanDetail") glColor3ub(63, 38, 38);
+        else if(col == "humanPrimary") glColor3ub(172, 94, 60);
+        else if(col == "humanSecondary") glColor3ub(92, 42, 29);
+        else if(col == "humanSkinTrans") glColor3ub(102, 90, 81);
+        else if(col == "humanDetailTrans") glColor3ub(44, 46, 49);
         else
         {
             cout<<"INVALID COLOR CODE: "<<col<<"\n";
@@ -69,6 +104,8 @@ void setColor(string col)
 //animate train
 float trainSpeed = 0;
 float trainPosition = 1400;
+float trainFaceSpeed = 0;
+float trainFacePosition = 1440;
 
 //animate clouds
 float cloud1Position = 250;
@@ -80,6 +117,32 @@ float cloud2Speed = 2.5;
 float cloud3Speed = 2.0;
 
 
+void drawCover()
+{
+    if(cover)
+    {
+        setColor("mediumGreen");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(1280,0);
+    glVertex2i(1280,620);
+    glVertex2i(0,620);
+    glEnd();
+
+    setColor("white");
+    renderBitmapString(400,400,(void *)font,"Minimalistic Train Scenerio");
+    renderBitmapString(400,400-30,(void *)font,"Press C: To Open or Close Scenario");
+    renderBitmapString(400,400-60,(void *)font,"Press X: To Start the Train");
+    renderBitmapString(400,400-90,(void *)font,"Press R: To Stop the Train");
+    renderBitmapString(400,400-120,(void *)font,"Press W: To Speed Up the Train");
+    renderBitmapString(400,400-150,(void *)font,"Press S: To Speed Down the Train");
+    renderBitmapString(400,400-180,(void *)font,"Press Q: To Make it Rain");
+    renderBitmapString(400,400-210,(void *)font,"Press E: To Stop Rain");
+    renderBitmapString(400,400-240,(void *)font,"Press T: To Toggle Between Day/Night");
+
+    }
+
+}
 
 void drawBackground()
 {
@@ -99,6 +162,13 @@ void drawTrain()
     glPushMatrix();
     glTranslatef(trainPosition,-270, 0);
     glScalef(2.2,2.2,1);
+
+
+
+
+
+
+
     //main body
     setColor("trainBody");
     glBegin(GL_QUADS);
@@ -405,10 +475,440 @@ void drawTrain()
     //end of window + doors component(3)
 
 
+
+
     glPopMatrix();
 }
 
 
+void drawHumanOne(){
+    //start human
+
+    glPushMatrix();
+    glTranslatef(145,145,0);
+    glScalef(0.4,0.4,1);
+
+    //frame
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(0,30);
+    glVertex2i(70,30);
+    glVertex2i(70,55);
+    glVertex2i(0,55);
+    glEnd();
+
+    //head
+    setColor("humanSkin");
+    glBegin(GL_QUADS);
+    glVertex2i(10,0);
+    glVertex2i(60,0);
+    glVertex2i(60,55);
+    glVertex2i(10,55);
+    glEnd();
+
+    //head extension
+    setColor("humanSkin");
+    glBegin(GL_QUADS);
+    glVertex2i(0,30);
+    glVertex2i(70,30);
+    glVertex2i(70,40);
+    glVertex2i(0,40);
+    glEnd();
+
+
+    //eyes
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,30);
+    glVertex2i(30,30);
+    glVertex2i(30,40);
+    glVertex2i(20,40);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(40,30);
+    glVertex2i(50,30);
+    glVertex2i(50,40);
+    glVertex2i(40,40);
+    glEnd();
+
+    //mouth
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,10);
+    glVertex2i(50,10);
+    glVertex2i(50,20);
+    glVertex2i(20,20);
+    glEnd();
+
+
+    //hair
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(10,55);
+    glVertex2i(60,55);
+    glVertex2i(60,65);
+    glVertex2i(10,65);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(40,65);
+    glVertex2i(60,65);
+    glVertex2i(60,75);
+    glVertex2i(40,75);
+    glEnd();
+
+    //start of body
+
+
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,-10);
+    glVertex2i(50,-10);
+    glVertex2i(50,0);
+    glVertex2i(20,0);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(-10,-80);
+    glVertex2i(70,-80);
+    glVertex2i(70,-10);
+    glVertex2i(-10,-10);
+    glEnd();
+
+
+
+
+
+
+
+
+    glPopMatrix();
+    //end of human
+}
+
+
+void drawHumanTwo(){
+    //start human
+
+    glPushMatrix();
+    glTranslatef(95,140,0);
+    glScalef(0.4,0.4,1);
+
+    //frame
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(0,10);
+    glVertex2i(70,10);
+    glVertex2i(70,55);
+    glVertex2i(0,55);
+    glEnd();
+
+    //head
+    setColor("humanSkin");
+    glBegin(GL_QUADS);
+    glVertex2i(10,0);
+    glVertex2i(60,0);
+    glVertex2i(60,55);
+    glVertex2i(10,55);
+    glEnd();
+
+    //head extension
+    setColor("humanSkin");
+    glBegin(GL_QUADS);
+    glVertex2i(10,30);
+    glVertex2i(60,30);
+    glVertex2i(60,40);
+    glVertex2i(10,40);
+    glEnd();
+
+
+    //eyes
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,30);
+    glVertex2i(30,30);
+    glVertex2i(30,40);
+    glVertex2i(20,40);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(40,30);
+    glVertex2i(50,30);
+    glVertex2i(50,40);
+    glVertex2i(40,40);
+    glEnd();
+
+    //mouth
+    setColor("humanSecondary");
+    glBegin(GL_QUADS);
+    glVertex2i(30,10);
+    glVertex2i(40,10);
+    glVertex2i(40,20);
+    glVertex2i(30,20);
+    glEnd();
+
+
+    //hair
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(10,55);
+    glVertex2i(60,55);
+    glVertex2i(60,65);
+    glVertex2i(10,65);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(30,65);
+    glVertex2i(50,65);
+    glVertex2i(50,75);
+    glVertex2i(30,75);
+    glEnd();
+
+    //start of body
+
+
+
+    setColor("humanPrimary");
+    glBegin(GL_QUADS);
+    glVertex2i(20,-10);
+    glVertex2i(50,-10);
+    glVertex2i(50,0);
+    glVertex2i(20,0);
+    glEnd();
+
+    setColor("humanPrimary");
+    glBegin(GL_QUADS);
+    glVertex2i(-10,-80);
+    glVertex2i(70,-80);
+    glVertex2i(70,-10);
+    glVertex2i(-10,-10);
+    glEnd();
+
+
+
+
+
+
+
+
+    glPopMatrix();
+    //end of human
+}
+
+
+void drawHumanThree(){
+    //start human
+
+    glPushMatrix();
+    glTranslatef(35,145,0);
+    glScalef(0.4,0.4,1);
+
+    //frame
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(0,10);
+    glVertex2i(70,10);
+    glVertex2i(70,55);
+    glVertex2i(0,55);
+    glEnd();
+
+    //head
+    setColor("humanSkin");
+    glBegin(GL_QUADS);
+    glVertex2i(10,0);
+    glVertex2i(60,0);
+    glVertex2i(60,55);
+    glVertex2i(10,55);
+    glEnd();
+
+    //head extension
+    setColor("humanSkin");
+    glBegin(GL_QUADS);
+    glVertex2i(0,30);
+    glVertex2i(70,30);
+    glVertex2i(70,40);
+    glVertex2i(0,40);
+    glEnd();
+
+
+    //eyes
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,30);
+    glVertex2i(30,30);
+    glVertex2i(30,40);
+    glVertex2i(20,40);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(40,30);
+    glVertex2i(50,30);
+    glVertex2i(50,40);
+    glVertex2i(40,40);
+    glEnd();
+
+    //mouth
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,10);
+    glVertex2i(50,10);
+    glVertex2i(50,20);
+    glVertex2i(20,20);
+    glEnd();
+
+
+    //hair
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(10,55);
+    glVertex2i(60,55);
+    glVertex2i(60,65);
+    glVertex2i(10,65);
+    glEnd();
+
+    setColor("humanDetail");
+    glBegin(GL_QUADS);
+    glVertex2i(20,65);
+    glVertex2i(60,65);
+    glVertex2i(60,75);
+    glVertex2i(20,75);
+    glEnd();
+
+    //start of body
+
+
+
+    setColor("humanSecondary");
+    glBegin(GL_QUADS);
+    glVertex2i(20,-10);
+    glVertex2i(50,-10);
+    glVertex2i(50,0);
+    glVertex2i(20,0);
+    glEnd();
+
+    setColor("humanSecondary");
+    glBegin(GL_QUADS);
+    glVertex2i(-10,-80);
+    glVertex2i(70,-80);
+    glVertex2i(70,-10);
+    glVertex2i(-10,-10);
+    glEnd();
+
+
+
+
+
+
+
+
+    glPopMatrix();
+    //end of human
+}
+
+
+
+
+
+
+
+void drawTrainHuman(){
+
+     //start human
+
+    glPushMatrix();
+    glTranslatef(trainFacePosition,150,0);
+    glScalef(0.4,0.4,1);
+
+
+    setColor("humanDetailTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(0,0);
+    glVertex2i(70,0);
+    glVertex2i(70,55);
+    glVertex2i(0,55);
+    glEnd();
+
+    setColor("humanSkinTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(10,0);
+    glVertex2i(60,0);
+    glVertex2i(60,55);
+    glVertex2i(10,55);
+    glEnd();
+
+
+    setColor("humanSkinTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(0,30);
+    glVertex2i(70,30);
+    glVertex2i(70,40);
+    glVertex2i(0,40);
+    glEnd();
+
+
+    //eyes
+
+    setColor("humanDetailTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(20,30);
+    glVertex2i(30,30);
+    glVertex2i(30,40);
+    glVertex2i(20,40);
+    glEnd();
+
+    setColor("humanDetailTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(40,30);
+    glVertex2i(50,30);
+    glVertex2i(50,40);
+    glVertex2i(40,40);
+    glEnd();
+
+    //mouth
+    setColor("humanDetailTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(20,10);
+    glVertex2i(50,10);
+    glVertex2i(50,20);
+    glVertex2i(20,20);
+    glEnd();
+
+
+    //hair
+    setColor("humanDetailTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(10,55);
+    glVertex2i(60,55);
+    glVertex2i(60,65);
+    glVertex2i(10,65);
+    glEnd();
+
+    setColor("humanDetailTrans");
+    glBegin(GL_QUADS);
+    glVertex2i(10,65);
+    glVertex2i(50,65);
+    glVertex2i(50,75);
+    glVertex2i(10,75);
+    glEnd();
+
+
+
+
+    glPopMatrix();
+    //end of human
+
+}
 void drawLeftBuilding()
 {
 
@@ -1627,10 +2127,9 @@ void drawBridge()
 
 
 }
-
-void drawLeftLand()
+void drawStation()
 {
-    glPushMatrix();
+    /*glPushMatrix();
     glTranslatef(50,-150,0);
     setColor("darkGreen");
     glBegin(GL_TRIANGLE_FAN);
@@ -1641,7 +2140,65 @@ void drawLeftLand()
         glVertex2f(x,y);
     }
     glEnd();
+    glPopMatrix();*/
+
+    //Pillar 1
+    glPushMatrix();
+    glTranslatef(165,-190, 0);
+    glScalef(.5,10,1);
+    setColor("rain");
+
+    glBegin(GL_QUADS);
+    glVertex2i(50,20);
+    glVertex2i(70,20);
+    glVertex2i(70,40);
+    glVertex2i(50,40);
+    glEnd();
     glPopMatrix();
+
+    //Pillar 2
+    glPushMatrix();
+    glTranslatef(50,-190, 0);
+    glScalef(.5,10,1);
+    setColor("rain");
+
+    glBegin(GL_QUADS);
+    glVertex2i(50,20);
+    glVertex2i(70,20);
+    glVertex2i(70,40);
+    glVertex2i(50,40);
+    glEnd();
+    glPopMatrix();
+    //Land Part
+    glPushMatrix();
+    glTranslatef(-500,-270, 0);
+    glScalef(10,10,1);
+    setColor("white");
+
+    glBegin(GL_QUADS);
+    glVertex2i(50,20);
+    glVertex2i(70,20);
+    glVertex2i(70,40);
+    glVertex2i(50,40);
+    glEnd();
+    glPopMatrix();
+
+    //Ceiling Part
+    glPushMatrix();
+    glTranslatef(-500,150, 0);
+    glScalef(10,1.5,1);
+    setColor("navyBlue");
+
+    glBegin(GL_QUADS);
+    glVertex2i(50,20);
+    glVertex2i(70,20);
+    glVertex2i(70,40);
+    glVertex2i(50,40);
+    glEnd();
+    glPopMatrix();
+
+
+
 }
 
 void drawRightLand()
@@ -1662,11 +2219,32 @@ void drawRightLand()
 
 void drawTree1()
 {
+/*glPushMatrix();
+glScalef(0.2,0.2,1);
+glPushMatrix();
+glTranslatef(200+5000,550,0);
+setColor("lightGreen");
+glBegin(GL_TRIANGLES);
+glVertex2f(-150, 0);
+glVertex2f(0, 150);
+glVertex2f(150, 0);
+glEnd();
+glPopMatrix();
 
+glPushMatrix();
+glTranslatef(200+5000,650,0);
+setColor("lightGreen");
+glBegin(GL_TRIANGLES);
+glVertex2f(-120, 0);
+glVertex2f(0, -120);
+glVertex2f(120, 0);
+glEnd();
+glPopMatrix();
+glPopMatrix();*/
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
-    glTranslatef(200,550,0);
+    glTranslatef(200+5000,550,0);
     setColor("lightGreen");
     glBegin(GL_TRIANGLE_FAN);
     for(float i=0; i<=2*3.14; i+=0.001)
@@ -1679,7 +2257,7 @@ void drawTree1()
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(200,650,0);
+    glTranslatef(200+5000,650,0);
     setColor("lightGreen");
     glBegin(GL_TRIANGLE_FAN);
     for(float i=0; i<=2*3.14; i+=0.001)
@@ -1699,7 +2277,7 @@ void drawTree2()
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
-    glTranslatef(550,470,0);
+    glTranslatef(550+5000,470,0);
     setColor("darkerGreen");
     glBegin(GL_TRIANGLE_FAN);
     for(float i=0; i<=2*3.14; i+=0.001)
@@ -1712,7 +2290,7 @@ void drawTree2()
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(550,570,0);
+    glTranslatef(550+5000,570,0);
     setColor("darkerGreen");
     glBegin(GL_TRIANGLE_FAN);
     for(float i=0; i<=2*3.14; i+=0.001)
@@ -1732,7 +2310,7 @@ void drawTree3()
     glPushMatrix();
     glScalef(0.2,0.2,1);
     glPushMatrix();
-    glTranslatef(900,390,0);
+    glTranslatef(900+4500,390,0);
     setColor("blue");
     glBegin(GL_TRIANGLE_FAN);
     for(float i=0; i<=2*3.14; i+=0.001)
@@ -1745,7 +2323,7 @@ void drawTree3()
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(900,490,0);
+    glTranslatef(900+4500,490,0);
     setColor("blue");
     glBegin(GL_TRIANGLE_FAN);
     for(float i=0; i<=2*3.14; i+=0.001)
@@ -2056,81 +2634,83 @@ void drawTallBuilding()
 void drawBranches()
 {
     //1
-    setColor("white");
-    glBegin(GL_QUADS);
-    glVertex2i(37,30);
-    glVertex2i(39,30);
-    glVertex2i(39,120);
-    glVertex2i(37,120);
-    glEnd();
 
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(37,65);
-    glVertex2i(39,65);
-    glVertex2i(53,95);
-    glVertex2i(50,95);
+    glVertex2i(37+1000,30);
+    glVertex2i(39+1000,30);
+    glVertex2i(39+1000,120);
+    glVertex2i(37+1000,120);
     glEnd();
 
 
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(38,75);
-    glVertex2i(36,75);
-    glVertex2i(21,105);
-    glVertex2i(23,105);
+    glVertex2i(37+1000,65);
+    glVertex2i(39+1000,65);
+    glVertex2i(53+1000,95);
+    glVertex2i(50+1000,95);
+    glEnd();
+
+
+    setColor("white");
+    glBegin(GL_QUADS);
+    glVertex2i(38+1000,75);
+    glVertex2i(36+1000,75);
+    glVertex2i(21+1000,105);
+    glVertex2i(23+1000,105);
     glEnd();
 
     //2
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(37+70,30-15);
-    glVertex2i(39+70,30-15);
-    glVertex2i(39+70,120-15);
-    glVertex2i(37+70,120-15);
+    glVertex2i(37+70+1000,30-15);
+    glVertex2i(39+70+1000,30-15);
+    glVertex2i(39+70+1000,120-15);
+    glVertex2i(37+70+1000,120-15);
     glEnd();
 
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(37+70,65-15);
-    glVertex2i(39+70,65-15);
-    glVertex2i(53+70,95-15);
-    glVertex2i(50+70,95-15);
+    glVertex2i(37+70+1000,65-15);
+    glVertex2i(39+70+1000,65-15);
+    glVertex2i(53+70+1000,95-15);
+    glVertex2i(50+70+1000,95-15);
     glEnd();
 
 
-    setColor("white");
-    glBegin(GL_QUADS);
-    glVertex2i(38+70,75-15);
-    glVertex2i(36+70,75-15);
-    glVertex2i(21+70,105-15);
-    glVertex2i(23+70,105-15);
-    glEnd();
-
+    /*  setColor("white");
+      glBegin(GL_QUADS);
+      glVertex2i(38+70+1000,75-15);
+      glVertex2i(36+70+1000,75-15);
+      glVertex2i(21+70+1000,105-15);
+      glVertex2i(23+70+1000,105-15);
+      glEnd();
+    */
     //3
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(37+140,30-20);
-    glVertex2i(39+140,30-20);
-    glVertex2i(39+140,120-20);
-    glVertex2i(37+140,120-20);
+    glVertex2i(37+140+900,30-20);
+    glVertex2i(39+140+900,30-20);
+    glVertex2i(39+140+900,120-20);
+    glVertex2i(37+140+900,120-20);
     glEnd();
 
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(37+140,65-20);
-    glVertex2i(39+140,65-20);
-    glVertex2i(53+140,95-20);
-    glVertex2i(50+140,95-20);
+    glVertex2i(37+140+900,65-20);
+    glVertex2i(39+140+900,65-20);
+    glVertex2i(53+140+900,95-20);
+    glVertex2i(50+140+900,95-20);
     glEnd();
 
 
     setColor("white");
     glBegin(GL_QUADS);
-    glVertex2i(38+140,75-20);
-    glVertex2i(36+140,75-20);
-    glVertex2i(21+140,105-20);
-    glVertex2i(23+140,105-20);
+    glVertex2i(38+140+900,75-20);
+    glVertex2i(36+140+900,75-20);
+    glVertex2i(21+140+900,105-20);
+    glVertex2i(23+140+900,105-20);
     glEnd();
 
     //4
@@ -2421,7 +3001,8 @@ void drawSun()
     glEnd();
     glPopMatrix();
 }
-void drawStars(){
+void drawStars()
+{
 
 
     glPushMatrix();
@@ -2651,6 +3232,8 @@ void drawStars(){
 
 }
 
+
+
 void Rain(int value)
 {
 
@@ -2679,11 +3262,16 @@ void Rain(int value)
 
     }
 }
+
+
+
 void update(int val)
 {
     //animate train
     if(trainPosition < -1050) trainPosition = 1400;
     trainPosition -= trainSpeed;
+    if(trainFacePosition < -1010) trainFacePosition = 1440;
+    trainFacePosition -= trainFaceSpeed;
 
 
     //animate clouds
@@ -2699,7 +3287,9 @@ void update(int val)
     glutTimerFunc(10, update,0);
 }
 
-
+void playMusic(){
+    PlaySound("music.wav", NULL,SND_ASYNC|SND_FILENAME|SND_LOOP);
+}
 
 
 void myDisplay(void)
@@ -2720,7 +3310,13 @@ void myDisplay(void)
     drawBridge();
     drawTallBuilding();
     drawTrain();
-    drawLeftLand();
+    drawTrainHuman();
+
+    drawHumanOne();
+    drawHumanTwo();
+    drawHumanThree();
+    drawStation();
+
     drawRightLand();
     drawRightBuilding();
     drawTree1();
@@ -2729,6 +3325,7 @@ void myDisplay(void)
     drawTree4();
     drawTree5();
     drawBranches();
+    drawCover();
     glFlush ();
 }
 
@@ -2747,10 +3344,12 @@ void handleKeypress(unsigned char key, int x, int y)
     {
     case 's':
         if(trainSpeed >= 1) trainSpeed -= 1;
+        if(trainFaceSpeed >= 1) trainFaceSpeed -= 1;
         break;
 
     case 'w':
         trainSpeed += 1;
+        trainFaceSpeed += 1;
         break;
 
     case 't':
@@ -2759,10 +3358,12 @@ void handleKeypress(unsigned char key, int x, int y)
 
     case 'r':
         trainSpeed = 0;
+        trainFaceSpeed = 0;
         break;
 
     case 'x':
         trainSpeed = 5;
+        trainFaceSpeed = 5;
         break;
 
     case 'q':
@@ -2774,6 +3375,8 @@ void handleKeypress(unsigned char key, int x, int y)
         rainday = false;
         Rain(rain);
         break;
+    case 'c':
+        cover = !cover;
 
         glutPostRedisplay();
 
@@ -2786,6 +3389,16 @@ void handleKeypress(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
+    cout<< "Minimalistic Train Scenerio"<<endl;
+    cout<< "Press C: To Open or Close Scenario"<<endl;
+    cout<< "Press X: To start the train"<<endl;
+    cout<< "Press R: To stop the train"<<endl;
+    cout<< "Press W: To speed up the train"<<endl;
+    cout<< "Press S: To speed down the train"<<endl;
+    cout<< "Press Q: To Make it rain"<<endl;
+    cout<< "Press E: To Stop rain"<<endl;
+    cout<< "Press T: To Cycle between Day/Night"<<endl;
+
     glutInit(&argc, argv);
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize (1280, 620);
@@ -2795,5 +3408,6 @@ int main(int argc, char** argv)
     myInit ();
     glutKeyboardFunc(handleKeypress);
     glutTimerFunc(0, update, 0);
+    playMusic();
     glutMainLoop();
 }
